@@ -1,0 +1,37 @@
+name: "yolo_nas_2"
+platform: "tensorrt_plan"
+max_batch_size: 8
+
+input [
+  {
+    name: "input"
+    data_type: TYPE_UINT8
+    format: FORMAT_NCHW
+    dims: [ 3, 640, 640 ]
+  }
+]
+
+output [
+  {
+    name: "det_boxes"
+    data_type: TYPE_FP32
+    dims: [1000,4]
+  },
+  {
+    name: "det_scores"
+    data_type: TYPE_FP32
+    dims: [1000 ]
+  },
+  {
+    name: "det_classes"
+    data_type: TYPE_INT32
+    dims: [ 1000]
+  },
+  {
+    name: "num_dets"
+    data_type: TYPE_INT32
+    dims: [ 1]
+  }
+]
+instance_group [ { count: 1}]
+
